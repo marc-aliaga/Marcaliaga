@@ -19,7 +19,7 @@ export default function BitcoinMacroDivergence() {
       </p>
       <p>
         However, as I{" "}
-        <a href="#/posts/stagflation-risk-rate-hikes">
+        <a href="/posts/stagflation-risk-rate-hikes/">
           mentioned a few days ago in a post
         </a>
         , this inflation cannot be solved simply through monetary policy.

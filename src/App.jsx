@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import "./App.css";
 import Profile from "./components/Profile.jsx";
 import EntryList from "./components/EntryList.jsx";
@@ -6,32 +5,18 @@ import EntryPage from "./components/EntryPage.jsx";
 import { profile } from "./data/profile.js";
 import { articles } from "./data/articles.js";
 import { posts } from "./data/posts.js";
+import { matchRoute } from "./routes.js";
 
-function useHashRoute() {
-  const [hash, setHash] = useState(window.location.hash);
-  useEffect(() => {
-    const onHashChange = () => setHash(window.location.hash);
-    window.addEventListener("hashchange", onHashChange);
-    return () => window.removeEventListener("hashchange", onHashChange);
-  }, []);
-  return hash;
-}
-
-export default function App() {
-  const hash = useHashRoute();
-  const articleSlug = hash.match(/^#\/articles\/(.+)$/)?.[1];
-  const postSlug = hash.match(/^#\/posts\/(.+)$/)?.[1];
-
-  const article = articleSlug && articles.find((a) => a.slug === articleSlug);
-  const post = postSlug && posts.find((p) => p.slug === postSlug);
-  const entry = article || post;
+export default function App({ pathname }) {
+  const route = matchRoute(pathname);
+  const entry = route?.type === "entry" ? route.entry : null;
 
   return (
     <div className="page">
       <Profile {...profile} />
       {entry ? (
         <EntryPage
-          sectionLabel={article ? "Article" : "Post"}
+          sectionLabel={route.kind === "article" ? "Article" : "Post"}
           title={entry.title}
           date={entry.date}
           Body={entry.Body}
