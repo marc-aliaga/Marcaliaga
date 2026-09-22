@@ -2,8 +2,17 @@
 // and a Body component (in src/content/articles/<slug>.jsx).
 import RussiaOilSovereignty from "../content/articles/russia-oil-sovereignty.jsx";
 import InterestRateParticipationHouseholds from "../content/articles/interest-rate-participation-households.jsx";
+import MicronMemorySupercycle from "../content/articles/micron-memory-supercycle.jsx";
 
 export const articles = [
+  {
+    slug: "micron-memory-supercycle",
+    title: "Micron Technology: Is the Memory Supercycle Just Getting Started?",
+    date: "2026-09-22",
+    excerpt:
+      "Why I took a long position in Micron despite AI-demand jitters: the case for a structurally undersupplied DRAM and HBM market, and what it implies for earnings and the stock's valuation multiple.",
+    Body: MicronMemorySupercycle,
+  },
   {
     slug: "russia-oil-sovereignty",
     title: "Is Russia Really Sovereign Over the Price of Its Own Oil?",
