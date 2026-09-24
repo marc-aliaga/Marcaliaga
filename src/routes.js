@@ -1,5 +1,6 @@
 import { articles } from "./data/articles.js";
 import { posts } from "./data/posts.js";
+import { valuations } from "./data/valuations.js";
 
 export const entryPath = (basePath, slug) => `/${basePath}/${slug}/`;
 
@@ -17,6 +18,11 @@ export function allRoutes() {
       path: entryPath("posts", entry.slug),
       type: "entry",
       kind: "post",
+      entry,
+    })),
+    ...valuations.map((entry) => ({
+      path: entryPath("valuations", entry.slug),
+      type: "valuation",
       entry,
     })),
   ];

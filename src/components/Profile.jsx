@@ -8,6 +8,7 @@ export default function Profile({
   photoUrl,
   projectsUrl,
   cvUrl,
+  valuations = [],
   links = [],
 }) {
   return (
@@ -40,6 +41,21 @@ export default function Profile({
             </a>
           )}
         </div>
+      )}
+      {valuations.length > 0 && (
+        <section className="profile-valuations">
+          <p className="profile-valuations-heading">Valuations</p>
+          <ul>
+            {valuations.map(({ slug, title }) => (
+              <li key={slug}>
+                <a href={`/valuations/${slug}/`}>
+                  <span>{title}</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
       {links.length > 0 && (
         <nav className="profile-links">

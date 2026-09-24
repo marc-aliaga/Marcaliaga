@@ -2,9 +2,11 @@ import "./App.css";
 import Profile from "./components/Profile.jsx";
 import EntryList from "./components/EntryList.jsx";
 import EntryPage from "./components/EntryPage.jsx";
+import ValuationPage from "./components/ValuationPage.jsx";
 import { profile } from "./data/profile.js";
 import { articles } from "./data/articles.js";
 import { posts } from "./data/posts.js";
+import { valuations } from "./data/valuations.js";
 import { matchRoute } from "./routes.js";
 
 export default function App({ pathname }) {
@@ -13,8 +15,10 @@ export default function App({ pathname }) {
 
   return (
     <div className="page">
-      <Profile {...profile} />
-      {entry ? (
+      <Profile {...profile} valuations={valuations} />
+      {route?.type === "valuation" ? (
+        <ValuationPage {...route.entry} />
+      ) : entry ? (
         <EntryPage
           sectionLabel={route.kind === "article" ? "Article" : "Post"}
           title={entry.title}

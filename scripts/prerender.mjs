@@ -29,8 +29,9 @@ const jsonLd = (data) =>
 
 function headFor(route) {
   const isEntry = route.type === "entry";
-  const title = isEntry ? `${route.entry.title} | ${site.name}` : site.name;
-  const description = isEntry ? route.entry.excerpt : site.description;
+  const hasEntry = isEntry || route.type === "valuation";
+  const title = hasEntry ? `${route.entry.title} | ${site.name}` : site.name;
+  const description = hasEntry ? route.entry.excerpt : site.description;
   const url = abs(route.path);
   const image = abs(profile.photoUrl);
   const sameAs = (profile.links ?? []).map((l) => l.url);
@@ -41,7 +42,7 @@ function headFor(route) {
     url && `<link rel="canonical" href="${escapeAttr(url)}" />`,
     `<meta property="og:site_name" content="${escapeAttr(site.name)}" />`,
     `<meta property="og:type" content="${isEntry ? "article" : "website"}" />`,
-    `<meta property="og:title" content="${escapeAttr(isEntry ? route.entry.title : site.name)}" />`,
+    `<meta property="og:title" content="${escapeAttr(hasEntry ? route.entry.title : site.name)}" />`,
     `<meta property="og:description" content="${escapeAttr(description)}" />`,
     url && `<meta property="og:url" content="${escapeAttr(url)}" />`,
     image && `<meta property="og:image" content="${escapeAttr(image)}" />`,
@@ -49,7 +50,7 @@ function headFor(route) {
       `<meta property="article:published_time" content="${route.entry.date}" />`,
     isEntry && `<meta property="article:author" content="${escapeAttr(site.name)}" />`,
     `<meta name="twitter:card" content="summary" />`,
-    `<meta name="twitter:title" content="${escapeAttr(isEntry ? route.entry.title : site.name)}" />`,
+    `<meta name="twitter:title" content="${escapeAttr(hasEntry ? route.entry.title : site.name)}" />`,
     `<meta name="twitter:description" content="${escapeAttr(description)}" />`,
     image && `<meta name="twitter:image" content="${escapeAttr(image)}" />`,
     jsonLd(
@@ -104,7 +105,7 @@ for (const route of routes) {
 if (siteUrl) {
   const urls = routes
     .map((r) => {
-      const lastmod = r.type === "entry" ? `<lastmod>${r.entry.date}</lastmod>` : "";
+      const lastmod = r.entry ? `<lastmod>${r.entry.date}</lastmod>` : "";
       return `  <url><loc>${escapeXml(abs(r.path))}</loc>${lastmod}</url>`;
     })
     .join("\n");

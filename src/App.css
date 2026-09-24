@@ -103,6 +103,50 @@
   color: #ffffff;
 }
 
+.profile-valuations {
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.profile-valuations-heading {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: var(--avatar-fill);
+  margin: 0;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.profile-valuations ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.profile-valuations li + li {
+  border-top: 1px solid var(--hairline);
+}
+
+.profile-valuations a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 9px 12px;
+  font-size: 0.86rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.profile-valuations a:hover {
+  color: var(--accent-hover);
+  background: var(--avatar-fill);
+}
+
 .profile-links {
   display: flex;
   flex-direction: column;
@@ -274,6 +318,108 @@
   border-top: 1px solid var(--hairline);
   padding-top: 16px;
   margin-top: 12px;
+}
+
+/* ---- Valuation page (Excel model as tables) ---- */
+.valuation-page {
+  min-width: 0;
+}
+
+.valuation-excerpt {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: 62ch;
+}
+
+.valuation-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.valuation-links a {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.valuation-links a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.sheet-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.sheet-tab {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  padding: 6px 10px;
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.sheet-tab:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.sheet-tab[aria-selected="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.sheet-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+}
+
+.sheet {
+  border-collapse: collapse;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.sheet td {
+  padding: 4px 10px;
+  border-bottom: 1px solid var(--hairline);
+  white-space: nowrap;
+  height: 1.9em;
+}
+
+.sheet tr:last-child td {
+  border-bottom: 0;
+}
+
+.sheet tr:hover td {
+  background: var(--avatar-fill);
+}
+
+.sheet-num {
+  text-align: right;
+}
+
+.sheet-bold {
+  font-weight: 600;
+}
+
+.sheet td.sheet-note {
+  white-space: normal;
+  min-width: 36ch;
+  color: var(--ink-soft);
 }
 
 @media (max-width: 640px) {
