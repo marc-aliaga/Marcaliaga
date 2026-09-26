@@ -3,8 +3,17 @@
 import RussiaOilSovereignty from "../content/articles/russia-oil-sovereignty.jsx";
 import InterestRateParticipationHouseholds from "../content/articles/interest-rate-participation-households.jsx";
 import MicronMemorySupercycle from "../content/articles/micron-memory-supercycle.jsx";
+import RosneftDcfVostokOil from "../content/articles/rosneft-dcf-vostok-oil.jsx";
 
 export const articles = [
+  {
+    slug: "rosneft-dcf-vostok-oil",
+    title: "Valuing Rosneft with a DCF: Oil, Sanctions and the Vostok Oil Project",
+    date: "2026-09-26",
+    excerpt:
+      "What I learned building an intrinsic valuation of a Russian oil major amid geopolitical uncertainty: the Vostok Oil ramp-up, three oil price scenarios, a 14.2% WACC, and an implied share price of RUB 641.",
+    Body: RosneftDcfVostokOil,
+  },
   {
     slug: "micron-memory-supercycle",
     title: "Micron Technology: Is the Memory Supercycle Just Getting Started?",

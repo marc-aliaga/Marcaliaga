@@ -276,6 +276,14 @@
   margin: 8px 0 0 0;
 }
 
+.entry-body h4 {
+  font-family: "Newsreader", Georgia, serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 1.05rem;
+  margin: 4px 0 0 0;
+}
+
 .entry-body ul {
   margin: 0;
   padding-left: 1.2em;
