@@ -1,9 +1,11 @@
 """Convert a valuation workbook into the JSON the site renders as HTML tables.
 
-Usage: python scripts/xlsx_to_json.py <workbook.xlsx> <output.json>
+Usage: python scripts/xlsx_to_json.py <workbook.xlsx> <output.json> [--bold-header]
 
 Reads the values Excel last calculated (so save the workbook in Excel first),
 formats numbers with each cell's own number format, and skips hidden sheets.
+--bold-header shows each sheet's first row in bold, for workbooks whose
+column headers aren't bold in Excel.
 Requires openpyxl.
 """
 
@@ -51,7 +53,7 @@ def format_cell(value, fmt):
     return str(value).strip()
 
 
-def convert_sheet(ws):
+def convert_sheet(ws, bold_header=False):
     rows = []
     for row in ws.iter_rows():
         cells = []
@@ -79,15 +81,19 @@ def convert_sheet(ws):
         rows.pop()
     while rows and not any(rows[0]):
         rows.pop(0)
+    if bold_header and rows:
+        for cell in rows[0]:
+            if cell:
+                cell["b"] = 1
     width = max((i + 1 for r in rows for i, c in enumerate(r) if c), default=0)
     first = min((i for r in rows for i, c in enumerate(r) if c), default=0)
     return [r[first:width] + [None] * (width - len(r)) for r in rows]
 
 
-def main(src, dest):
+def main(src, dest, bold_header=False):
     wb = openpyxl.load_workbook(src, data_only=True)
     sheets = [
-        {"name": ws.title, "rows": convert_sheet(ws)}
+        {"name": ws.title, "rows": convert_sheet(ws, bold_header)}
         for ws in wb.worksheets
         if ws.sheet_state == "visible"
     ]
@@ -97,4 +103,4 @@ def main(src, dest):
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:3])
+    main(*sys.argv[1:3], bold_header="--bold-header" in sys.argv[3:])
